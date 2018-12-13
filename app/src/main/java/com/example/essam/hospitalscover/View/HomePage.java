@@ -1,8 +1,13 @@
 package com.example.essam.hospitalscover.View;
 
+import android.Manifest;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +21,8 @@ import com.example.essam.hospitalscover.Interfaces.AdapterCategoryInterface;
 import com.example.essam.hospitalscover.Model.Category;
 import com.example.essam.hospitalscover.Model.CategoryData;
 import com.example.essam.hospitalscover.ModelView.CategoryModelView;
+import com.example.essam.hospitalscover.ModelView.GoogleMapsNavigation;
+import com.example.essam.hospitalscover.ModelView.MyMACAdress;
 import com.example.essam.hospitalscover.R;
 
 import java.util.ArrayList;
@@ -28,19 +35,67 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
     private CategoryModelView modelView;
     private List<CategoryData> categoryList;
     private ProgressBar progressBar;
+/*
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
+        if(requestCode==0)
+        {
+            // lat,long
+            //public static String drivingURL="https://www.google.com/maps/dir/?api=1&origin=30.0469686,31.3463023&destination=30.0602538,31.2025336&travelmode=driving";
+
+            //get redirect to route google maps
+            GoogleMapsNavigation googleMapsNavigation= new GoogleMapsNavigation(this,30.0,31.0);
+            startActivity( googleMapsNavigation.getGoogleMapsIntentAfterInit());
+
+        }
+    }
+*/
+    public void requestPermissions()
+    {
+        boolean gpsRequest=true;
+        int permissionCheckGPS = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (permissionCheckGPS != PackageManager.PERMISSION_GRANTED ) {
+            gpsRequest=true;
+        }
+
+        if (gpsRequest)
+        {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},0);
+        }
+        else
+        {
+            // lat,long
+            //public static String drivingURL="https://www.google.com/maps/dir/?api=1&origin=30.0469686,31.3463023&destination=30.0602538,31.2025336&travelmode=driving";
+
+            //get redirect to route google maps
+            GoogleMapsNavigation googleMapsNavigation= new GoogleMapsNavigation(this,30.0,31.0);
+            startActivity( googleMapsNavigation.getGoogleMapsIntentAfterInit());
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_home_page);
+
+      //  requestPermissions();
+
         modelView = ViewModelProviders.of(this).get(CategoryModelView.class);
         initView();
         initListener();
 
-        // request for all category
         showProgress();
         modelView.getAllCategory();
 
+        GoogleMapsNavigation googleMapsNavigation= new GoogleMapsNavigation(this,30.0,31.0);
+        startActivity( googleMapsNavigation.getGoogleMapsIntentAfterInit());
+
+
+        //get mac address
+        String macAddress= MyMACAdress.getMacAddr();
     }
 
     private void initListener() {

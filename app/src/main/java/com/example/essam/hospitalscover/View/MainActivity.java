@@ -1,18 +1,13 @@
 package com.example.essam.hospitalscover.View;
 
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
+
 import android.content.Intent;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.essam.hospitalscover.R;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,5 +25,7 @@ public class MainActivity extends AppCompatActivity {
         }, SPLASH_DISPLAY_LENGTH);
 
     }
+
+
 
 }
