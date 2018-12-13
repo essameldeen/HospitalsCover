@@ -1,13 +1,16 @@
 package com.example.essam.hospitalscover.ModelView;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
+
 import com.example.essam.hospitalscover.Model.SubCategory;
+import com.example.essam.hospitalscover.Repository.SubCategoryRepo;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class SubCategoryModelViewextends ViewModel {
+public class SubCategoryModelView extends ViewModel {
     private MutableLiveData<SubCategory> allSubCategory = new MutableLiveData<>();
 
     public MutableLiveData<SubCategory> getSubCategory() {
@@ -15,8 +18,8 @@ public class SubCategoryModelViewextends ViewModel {
     }
 
 
-    public void getAllSubCategory() {
-        SubCategoryRepo.getInstance().getAllSubCategory().subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe(new Observer<SubCategory>() {
+    public void getAllSubCategory(String id ) {
+        SubCategoryRepo.getInstance().getAllSubCategory(id).subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe(new Observer<SubCategory>() {
             @Override
             public void onSubscribe(Disposable d) {
 

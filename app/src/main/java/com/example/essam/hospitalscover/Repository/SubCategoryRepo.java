@@ -1,7 +1,9 @@
 package com.example.essam.hospitalscover.Repository;
 
 import com.example.essam.hospitalscover.Model.Category;
+import com.example.essam.hospitalscover.Model.SubCategory;
 import com.example.essam.hospitalscover.webServicse.CategoryWebService;
+import com.example.essam.hospitalscover.webServicse.SubCategoryWebService;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -16,7 +18,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SubCategoryRepo {
-    private CategoryWebService categoryWebService;
+    private SubCategoryWebService subCategoryWebService;
 
     // region singleton implementation
     private static class Loader {
@@ -30,7 +32,7 @@ public class SubCategoryRepo {
 
         String BASE_URL = "https://us-central1-vodafone-hospitals-cover.cloudfunctions.net/";
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(client).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build();
-        categoryWebService = retrofit.create(CategoryWebService.class);
+        subCategoryWebService = retrofit.create(SubCategoryWebService.class);
     }
 
     public static SubCategoryRepo getInstance() {
@@ -40,18 +42,18 @@ public class SubCategoryRepo {
     // all function that connect to api "end Point "
 
 
-    public Observable<Category> getAllCategory() {
-        return Observable.create(new ObservableOnSubscribe<Category>() {
+    public Observable<SubCategory> getAllSubCategory(String id) {
+        return Observable.create(new ObservableOnSubscribe<SubCategory>() {
             @Override
-            public void subscribe(ObservableEmitter<Category> emitter) throws Exception {
-                categoryWebService.getAllCategory().subscribeOn(Schedulers.io()).subscribeOn(Schedulers.io()).subscribe(new Observer<Category>() {
+            public void subscribe(ObservableEmitter<SubCategory> emitter) throws Exception {
+                subCategoryWebService.getAllSubCategory(id).subscribeOn(Schedulers.io()).subscribeOn(Schedulers.io()).subscribe(new Observer<SubCategory>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(Category value) {
+                    public void onNext(SubCategory value) {
                         emitter.onNext(value);
                     }
 

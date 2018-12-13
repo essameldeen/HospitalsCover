@@ -12,22 +12,24 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.essam.hospitalscover.Interfaces.AdapterCategoryInterface;
 import com.example.essam.hospitalscover.Model.CategoryData;
+import com.example.essam.hospitalscover.Model.SubCategory;
+import com.example.essam.hospitalscover.Model.SubCategoryData;
 import com.example.essam.hospitalscover.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.ViewHolder> {
-    List<CategoryData> subCategoryList;
+    List<SubCategoryData> subCategoryList;
     Context context;
     AdapterCategoryInterface anInterface;
 
-    public SubCategoryAdapter(Context context ,AdapterCategoryInterface  anInterface) {
+    public SubCategoryAdapter(Context context, AdapterCategoryInterface anInterface) {
         this.context = context;
         this.anInterface = anInterface;
     }
 
-    public void setData(List<CategoryData> categories) {
+    public void setData(List<SubCategoryData> categories) {
         this.subCategoryList = new ArrayList<>();
         subCategoryList.addAll(categories);
     }
@@ -35,21 +37,18 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     @NonNull
     @Override
     public SubCategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_single_categry, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_singele_sub_category, viewGroup, false);
         return new SubCategoryAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SubCategoryAdapter.ViewHolder viewHolder, int position) {
-        CategoryData item = subCategoryList.get(position);
+        SubCategoryData item = subCategoryList.get(position);
 
         if (item.getName() != null) {
-            viewHolder.categoryName.setText(item.getName());
+            viewHolder.subCategoryName.setText(item.getName());
         }
 
-        if (item.getIcon() != null) {
-            Glide.with(context).load(item.getIcon()).into(viewHolder.categoryImage);
-        }
 
     }
 
@@ -62,17 +61,16 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView categoryName;
-        ImageView categoryImage;
+        TextView subCategoryName;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            categoryName = itemView.findViewById(R.id.name_category);
-            categoryImage = itemView.findViewById(R.id.image_category);
+            subCategoryName = itemView.findViewById(R.id.name_subCategory);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    anInterface.onCardClick(itemView,getAdapterPosition());
+                    anInterface.onCardClick(itemView, getAdapterPosition());
                 }
             });
         }
