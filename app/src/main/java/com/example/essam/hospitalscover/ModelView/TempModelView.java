@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 
+import com.example.essam.hospitalscover.Model.Example;
 import com.example.essam.hospitalscover.Repository.Temp;
 
 import java.util.List;
@@ -14,23 +15,23 @@ import io.reactivex.schedulers.Schedulers;
 
 public class TempModelView extends ViewModel {
 
-    private MutableLiveData<List<String>> test = new MutableLiveData<>();
+    private MutableLiveData<Example> test = new MutableLiveData<>();
 
-    public MutableLiveData<List<String>> getTest() {
+    public MutableLiveData<Example> getTest() {
         return test;
     }
 
     // all function that connect between the view and repo :D
-    public void getAllTest(Context context, String id) {
+    public void getAllTest(  ) {
 
-        Temp.getInstance().getList(id, context).subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe(new Observer<List<String>>() {
+        Temp.getInstance().getList().subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe(new Observer<Example>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(List<String> value) {
+            public void onNext(Example value) {
                 test.postValue(value);
             }
 
