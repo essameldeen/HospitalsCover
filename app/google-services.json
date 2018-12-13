@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "338257543334",
+    "firebase_url": "https://vodafone-hospitals-cover.firebaseio.com",
+    "project_id": "vodafone-hospitals-cover",
+    "storage_bucket": "vodafone-hospitals-cover.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338257543334:android:37619a23ceb53294",
+        "android_client_info": {
+          "package_name": "com.example.essam.hospitalscover"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "338257543334-22ik53p497jf1boie7eqlicnc5ha31r8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.essam.hospitalscover",
+            "certificate_hash": "58eef46e76c559eb651757f1f45df915f5fca748"
+          }
+        },
+        {
+          "client_id": "338257543334-t6le9b7n8fnvt45b57roibmf3ltq494l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPEm7knUDug9GNxzQ6fkvGWBbI1y6ESAM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "338257543334-t6le9b7n8fnvt45b57roibmf3ltq494l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
