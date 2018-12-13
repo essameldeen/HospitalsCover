@@ -1,8 +1,10 @@
 package com.example.essam.hospitalscover.Repository;
 
 import com.example.essam.hospitalscover.Model.Category;
+import com.example.essam.hospitalscover.Model.Result;
 import com.example.essam.hospitalscover.Model.SubCategory;
 import com.example.essam.hospitalscover.webServicse.CategoryWebService;
+import com.example.essam.hospitalscover.webServicse.FilterRequest;
 import com.example.essam.hospitalscover.webServicse.SubCategoryWebService;
 
 import io.reactivex.Observable;
@@ -12,6 +14,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -54,6 +57,7 @@ public class SubCategoryRepo {
 
                     @Override
                     public void onNext(SubCategory value) {
+
                         emitter.onNext(value);
                     }
 
@@ -71,6 +75,41 @@ public class SubCategoryRepo {
 
             }
         });
+
+    }
+
+
+    public Observable<Result> getResults(FilterRequest filterRequest) {
+        return Observable.create(new ObservableOnSubscribe<Result>() {
+            @Override
+            public void subscribe(ObservableEmitter<Result> emitter) throws Exception {
+
+                subCategoryWebService.getNeartsHospitals(filterRequest).subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe(new Observer<Result>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result value) {
+                        emitter.onNext(value);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        emitter.onNext(null);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+            }
+        });
+
 
     }
 }

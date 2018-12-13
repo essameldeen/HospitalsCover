@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="3dp">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_hospitals"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/profile" />
+
+        <TextView
+            android:id="@+id/name_hospital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/image_hospitals"
+            android:text="Ain Shams"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <RatingBar
+            android:id="@+id/hospital_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/name_hospital"
+            android:layout_marginTop="0dp"
+            android:layout_toRightOf="@+id/image_hospitals"
+            android:max="5"
+            android:rating="2"
+            android:theme="@style/RatingBar" />
+
+        <TextView
+            android:id="@+id/hospital_address"
+            android:text="location is sanjnsadjnsjdansajdnjsandjnasjdnajsdnjsadsandjksajdn"
+            android:layout_below="@+id/hospital_rating"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <RelativeLayout
+            android:layout_below="@+id/hospital_address"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/booking"
+                android:text="BOOKING"
+                android:textColor="@color/colorPrimary"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/call"
+                android:background="@drawable/phone_icon"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="8dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp" />
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/nav_map"
+                android:background="@drawable/map_icon"
+                android:layout_toLeftOf="@+id/call"
+                android:layout_margin="8dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

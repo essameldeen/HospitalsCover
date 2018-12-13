@@ -2,6 +2,7 @@ package com.example.essam.hospitalscover.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -81,13 +82,22 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
 
     @Override
     public void onCardClick(View view, int position) {
-        Toast.makeText(this, categoryList.get(position).getName() + " " + categoryList.get(position).getId(), Toast.LENGTH_SHORT).show();
+        goToSubCategory(position);
 
+    }
+
+    private void goToSubCategory(int position) {
+        Intent intent = new Intent(this, SubCategory.class);
+        intent.putExtra("name", categoryList.get(position).getName());
+        intent.putExtra("id", categoryList.get(position).getId());
+        intent.putExtra("icon", categoryList.get(position).getIcon());
+        startActivity(intent);
     }
 
     private void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
     }
+
     private void hideProgress() {
         progressBar.setVisibility(View.GONE);
     }

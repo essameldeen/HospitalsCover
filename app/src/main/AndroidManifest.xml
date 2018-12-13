@@ -33,7 +33,8 @@
         </service>
 
         <activity android:name=".View.HomePage" />
-        <activity android:name=".View.SubCategory"></activity>
+        <activity android:name=".View.SubCategory" />
+        <activity android:name=".View.ResultActiviyt"></activity>
     </application>
 
 </manifest>

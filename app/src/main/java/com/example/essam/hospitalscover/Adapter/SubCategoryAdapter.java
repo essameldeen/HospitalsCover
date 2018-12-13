@@ -32,6 +32,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     public void setData(List<SubCategoryData> categories) {
         this.subCategoryList = new ArrayList<>();
         subCategoryList.addAll(categories);
+        notifyDataSetChanged();
     }
 
     @NonNull
