@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.essam.hospitalscover.Interfaces.AdapterCategoryInterface;
@@ -15,7 +16,6 @@ import com.example.essam.hospitalscover.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     List<CategoryData> categoryList;
@@ -63,7 +63,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView categoryName;
-        CircleImageView categoryImage;
+        ImageView categoryImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
