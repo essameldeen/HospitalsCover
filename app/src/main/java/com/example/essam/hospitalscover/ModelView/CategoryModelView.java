@@ -6,8 +6,6 @@ import android.arch.lifecycle.ViewModel;
 import com.example.essam.hospitalscover.Model.Category;
 import com.example.essam.hospitalscover.Repository.CategoryRepo;
 
-import java.util.List;
-
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
