@@ -9,7 +9,6 @@ import com.example.essam.hospitalscover.Repository.Temp;
 import java.util.List;
 
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 

@@ -1,4 +1,10 @@
-package com.example.essam.hospitalscover;
+package com.example.essam.hospitalscover.FireBase;
 
-class MyFirebaseInstanceIDService {
+import android.app.Service;
+
+public class MyFirebaseInstanceIDService extends MyFirebaseInstanceIDService {
+
+
 }
+
+
