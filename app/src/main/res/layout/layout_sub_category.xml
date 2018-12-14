@@ -7,7 +7,16 @@
     android:orientation="vertical"
     tools:context=".View.SubCategory">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"></android.support.v7.widget.Toolbar>
+
+
     <android.support.design.card.MaterialCardView
+        android:layout_below="@+id/toolbar"
         android:id="@+id/cardMainCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

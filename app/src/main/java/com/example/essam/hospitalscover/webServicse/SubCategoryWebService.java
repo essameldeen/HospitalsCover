@@ -20,7 +20,6 @@ public interface SubCategoryWebService {
     Observable<SubCategory> getAllSubCategory(@Query("categoryId") String id);
 
     @POST("Hospital-filterByDestination")
-    @Headers({"Content-Type :application/json"})
     Observable<Result> getNeartsHospitals(@Body FilterRequest request);
 
 

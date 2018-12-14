@@ -1,12 +1,15 @@
 package com.example.essam.hospitalscover.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.essam.hospitalscover.webServicse.Destination;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class ResultData implements Serializable {
+public  class ResultData implements Serializable {
     @SerializedName("address")
     @Expose
     private String address;
@@ -35,6 +38,11 @@ public class ResultData implements Serializable {
     @Expose
     private Double distance;
 
+    public ResultData() {
+    }
+
+
+
     public String getAddress() {
         return address;
     }
@@ -44,6 +52,7 @@ public class ResultData implements Serializable {
     }
 
     public Double getRating() {
+
         return rating;
     }
 
@@ -106,5 +115,8 @@ public class ResultData implements Serializable {
     public void setDistance(Double distance) {
         this.distance = distance;
     }
+
+
+
 
 }

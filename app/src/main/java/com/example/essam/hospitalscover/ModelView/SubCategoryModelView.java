@@ -59,11 +59,13 @@ public class SubCategoryModelView extends ViewModel {
 
             @Override
             public void onNext(Result value) {
+
                 result.postValue(value);
             }
 
             @Override
             public void onError(Throwable e) {
+
                 result.postValue(null);
             }
 

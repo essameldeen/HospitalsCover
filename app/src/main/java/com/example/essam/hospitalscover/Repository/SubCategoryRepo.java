@@ -92,6 +92,7 @@ public class SubCategoryRepo {
 
                     @Override
                     public void onNext(Result value) {
+
                         emitter.onNext(value);
                     }
 

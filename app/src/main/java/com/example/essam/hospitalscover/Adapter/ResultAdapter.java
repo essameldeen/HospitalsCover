@@ -1,6 +1,7 @@
 package com.example.essam.hospitalscover.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageButton;
@@ -8,8 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.essam.hospitalscover.Interfaces.AdapterCategoryInterface;
 import com.example.essam.hospitalscover.Model.Result;
 import com.example.essam.hospitalscover.Model.ResultData;
@@ -46,7 +49,21 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+         ResultData item = resultDatalist.get(position);
+
+         if(item.getName()!=null)
+         viewHolder.hospital_name.setText(item.getName());
+         if(item.getAddress()!=null)
+             viewHolder.hospital_address.setText(item.getAddress());
+         if(item.getImage()!=null){
+             Glide.with(context).load(item.getImage()).into(viewHolder.hospital_image);
+         }
+         int x = item.getRating().intValue();
+         viewHolder.hospital_rating.setNumStars(x);
+
+
+
 
     }
 
@@ -65,6 +82,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         private AppCompatButton booking;
         private AppCompatImageButton call;
         private AppCompatImageButton nav;
+        private RatingBar hospital_rating;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,6 +92,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
             booking = (AppCompatButton) itemView.findViewById(R.id.booking);
             call = (AppCompatImageButton) itemView.findViewById(R.id.call);
             nav = (AppCompatImageButton) itemView.findViewById(R.id.nav_map);
+            hospital_rating=(RatingBar)itemView.findViewById(R.id.hospital_rating);
 
             nav.setOnClickListener(new View.OnClickListener() {
                 @Override

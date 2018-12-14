@@ -12,4 +12,7 @@ public class Destination implements Serializable {
     @SerializedName("latitude")
     @Expose
     public Double latitude;
+
+    public Destination() {
+    }
 }

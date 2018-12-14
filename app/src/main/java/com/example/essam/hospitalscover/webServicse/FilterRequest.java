@@ -11,6 +11,7 @@ public class FilterRequest {
     @Expose
     public String subCategoryId;
 
-
-
+    public FilterRequest() {
+             destination = new Destination();
+    }
 }
