@@ -3,6 +3,7 @@ package com.example.essam.hospitalscover.View;
 import android.Manifest;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,11 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +34,8 @@ import com.example.essam.hospitalscover.Interfaces.AdapterCategoryInterface;
 import com.example.essam.hospitalscover.Model.Category;
 import com.example.essam.hospitalscover.Model.CategoryData;
 import com.example.essam.hospitalscover.ModelView.CategoryModelView;
+import com.example.essam.hospitalscover.ModelView.GoogleMapsNavigation;
+import com.example.essam.hospitalscover.ModelView.MyMACAdress;
 import com.example.essam.hospitalscover.R;
 
 import java.util.ArrayList;
@@ -40,6 +48,7 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
     private CategoryModelView modelView;
     private List<CategoryData> categoryList;
     private ProgressBar progressBar;
+
     private Toolbar toolbar ;
     private static final int REQUEST_LOCATION = 1;
     LocationManager locationManager;
@@ -49,6 +58,9 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_home_page);
+
+      //  requestPermissions();
+
         modelView = ViewModelProviders.of(this).get(CategoryModelView.class);
         initView();
         initListener();
@@ -64,10 +76,15 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
 
         }
 
-        // request for all category
         showProgress();
         modelView.getAllCategory();
 
+        GoogleMapsNavigation googleMapsNavigation= new GoogleMapsNavigation(this,30.0,31.0);
+        startActivity( googleMapsNavigation.getGoogleMapsIntentAfterInit());
+
+
+        //get mac address
+        String macAddress= MyMACAdress.getMacAddr();
     }
 
     private void initListener() {
@@ -113,9 +130,10 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
 
     @Override
     public void onCardClick(View view, int position) {
-        goToSubCategory(position);
+        Toast.makeText(this, categoryList.get(position).getName() + " " + categoryList.get(position).getId(), Toast.LENGTH_SHORT).show();
 
     }
+
 
     private void goToSubCategory(int position) {
         Intent intent = new Intent(this, SubCategory.class);
@@ -129,10 +147,10 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
         startActivity(intent);
     }
 
+
     private void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
     }
-
     private void hideProgress() {
         progressBar.setVisibility(View.GONE);
     }
