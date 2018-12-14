@@ -103,7 +103,7 @@ public class ResultActiviyt extends AppCompatActivity implements AdapterCategory
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.CALL_PHONE},
                     10);
-            return;
+            callHospital(position);
         }else {
             try{
                 startActivity(callIntent);
