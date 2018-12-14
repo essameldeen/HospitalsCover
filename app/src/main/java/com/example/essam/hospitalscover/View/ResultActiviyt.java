@@ -7,11 +7,14 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.essam.hospitalscover.Adapter.ResultAdapter;
@@ -38,7 +41,8 @@ public class ResultActiviyt extends AppCompatActivity implements AdapterCategory
     private String macAddress;
     private String phone;
     private ResultViewModel viewModel;
-
+    AlertDialog dialog;
+    AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,13 +128,25 @@ public class ResultActiviyt extends AppCompatActivity implements AdapterCategory
     }
 
     private void booking(int position) {
-        RequestBooking requestBooking = new RequestBooking();
-        requestBooking.subCategoryId = getIntent().getStringExtra("id");
-        requestBooking.macAddress = MyMACAdress.getMacAddr();
-        requestBooking.phone = "01119955849";
-        requestBooking.hospitalId = resultDataList.get(position).getId();
-        viewModel.booking(requestBooking);
+        builder = new AlertDialog.Builder(this,R.style.AlertDialog)
+                .setTitle("Please Enter Your Phone Number")
+                .setCancelable(true);
+        final EditText input = new EditText(this);
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_PHONE );
+        builder.setView(input);
 
+        // Set up the buttons
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            RequestBooking requestBooking = new RequestBooking();
+            requestBooking.subCategoryId = getIntent().getStringExtra("id");
+            requestBooking.macAddress = MyMACAdress.getMacAddr();
+            requestBooking.phone = input.getText().toString();
+            requestBooking.hospitalId = resultDataList.get(position).getId();
+            viewModel.booking(requestBooking);
+        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+        dialog = builder.show();
 
     }
 }
