@@ -3,17 +3,19 @@ package com.example.essam.hospitalscover.webServicse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RequestBooking {
-    @SerializedName("subCategoryId")
+class Reservation {
+
+    @SerializedName("createdAt")
     @Expose
-    public String subCategoryId;
-    @SerializedName("hospitalId")
+    public String createdAt;
+    @SerializedName("hospitalResourceId")
     @Expose
-    public String hospitalId;
+    public String hospitalResourceId;
     @SerializedName("macAddress")
     @Expose
     public String macAddress;
     @SerializedName("phone")
     @Expose
     public String phone;
+
 }

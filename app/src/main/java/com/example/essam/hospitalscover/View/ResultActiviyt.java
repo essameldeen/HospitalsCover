@@ -128,7 +128,7 @@ public class ResultActiviyt extends AppCompatActivity implements AdapterCategory
         requestBooking.subCategoryId = getIntent().getStringExtra("id");
         requestBooking.macAddress = MyMACAdress.getMacAddr();
         requestBooking.phone = "01119955849";
-        requestBooking.idHospital = resultDataList.get(position).getId();
+        requestBooking.hospitalId = resultDataList.get(position).getId();
         viewModel.booking(requestBooking);
 
 

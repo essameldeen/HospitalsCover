@@ -3,13 +3,15 @@ package com.example.essam.hospitalscover.webServicse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class BookingResponse {
-    @SerializedName("data")
+public class Data {
+
+    @SerializedName("reservation")
     @Expose
-    public Data data;
-    @SerializedName("available")
+    public Reservation reservation;
+    @SerializedName("hospital")
     @Expose
-    public Boolean available;
+    public Hospital hospital;
+
 
 
 }
