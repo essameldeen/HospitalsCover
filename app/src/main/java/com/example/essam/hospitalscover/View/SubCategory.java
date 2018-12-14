@@ -44,6 +44,7 @@ public class SubCategory extends AppCompatActivity implements AdapterCategoryInt
     private List<SubCategoryData> subCategoryDataList;
     private ProgressBar progressBar;
     private String idCategory;
+    private String idSubCategory;
     private Toolbar toolbar;
     private double LONG, LAT;
 
@@ -120,6 +121,7 @@ public class SubCategory extends AppCompatActivity implements AdapterCategoryInt
         ArrayList<ResultData> list = (ArrayList<ResultData>) data;
         Intent intent = new Intent(this, ResultActiviyt.class);
         intent.putExtra("data", (Serializable) list);
+        intent.putExtra("id", idSubCategory);
         startActivity(intent);
     }
 
@@ -155,6 +157,7 @@ public class SubCategory extends AppCompatActivity implements AdapterCategoryInt
         filterRequest.destination.latitude = LAT;
         filterRequest.destination.longitude = LONG;
         filterRequest.subCategoryId = subCategoryDataList.get(position).getId();
+        idSubCategory = subCategoryDataList.get(position).getId();
         modelView.getFilterHospitals(filterRequest);
 
     }
@@ -169,7 +172,7 @@ public class SubCategory extends AppCompatActivity implements AdapterCategoryInt
 
     private void showDialog() {
 
-        builder = new AlertDialog.Builder(this,R.style.AlertDialog)
+        builder = new AlertDialog.Builder(this, R.style.AlertDialog)
                 .setTitle("Pleas Waiting ")
                 .setMessage("Searching for your")
 
@@ -178,7 +181,7 @@ public class SubCategory extends AppCompatActivity implements AdapterCategoryInt
         dialog = builder.show();
     }
 
-    private void hideDialog(){
+    private void hideDialog() {
         dialog.dismiss();
     }
 }

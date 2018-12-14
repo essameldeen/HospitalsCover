@@ -3,7 +3,6 @@ package com.example.essam.hospitalscover.View;
 import android.Manifest;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -52,7 +51,7 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
     private Toolbar toolbar ;
     private static final int REQUEST_LOCATION = 1;
     LocationManager locationManager;
-    Location currentLocation=null;
+   public static Location currentLocation=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,12 +78,6 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
         showProgress();
         modelView.getAllCategory();
 
-        GoogleMapsNavigation googleMapsNavigation= new GoogleMapsNavigation(this,30.0,31.0);
-        startActivity( googleMapsNavigation.getGoogleMapsIntentAfterInit());
-
-
-        //get mac address
-        String macAddress= MyMACAdress.getMacAddr();
     }
 
     private void initListener() {
@@ -130,8 +123,7 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
 
     @Override
     public void onCardClick(View view, int position) {
-        Toast.makeText(this, categoryList.get(position).getName() + " " + categoryList.get(position).getId(), Toast.LENGTH_SHORT).show();
-
+             goToSubCategory(position);
     }
 
 
@@ -142,8 +134,6 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
         intent.putExtra("icon", categoryList.get(position).getIcon());
         intent.putExtra("lat",currentLocation.getLatitude());
         intent.putExtra("long",currentLocation.getLongitude());
-
-
         startActivity(intent);
     }
 
