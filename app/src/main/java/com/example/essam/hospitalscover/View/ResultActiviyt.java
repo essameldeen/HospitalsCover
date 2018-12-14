@@ -21,7 +21,6 @@ import com.example.essam.hospitalscover.ModelView.GoogleMapsNavigation;
 import com.example.essam.hospitalscover.ModelView.MyMACAdress;
 import com.example.essam.hospitalscover.ModelView.ResultViewModel;
 import com.example.essam.hospitalscover.R;
-import com.example.essam.hospitalscover.Repository.ResultRepo;
 import com.example.essam.hospitalscover.webServicse.BookingResponse;
 import com.example.essam.hospitalscover.webServicse.Destination;
 import com.example.essam.hospitalscover.webServicse.RequestBooking;
@@ -78,17 +77,18 @@ public class ResultActiviyt extends AppCompatActivity implements AdapterCategory
     @Override
     public void onCardClick(View view, int position) {
 
-        int idView = view.getId();
+        int idView = view.getId() ;
 
-        switch (idView) {
+        switch (idView){
             case R.id.booking:
                 booking(position);
+                break;
+            case R.id.call:
+                callHospital(position);
                 break;
             case R.id.nav_map:
                 gotToMap(position);
                 break;
-            case R.id.call:
-                callHospital(position);
 
             default:
                 break;
