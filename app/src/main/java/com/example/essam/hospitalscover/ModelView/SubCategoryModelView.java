@@ -50,8 +50,8 @@ public class SubCategoryModelView extends ViewModel {
 
     }
 
-    public void getFilterHospitals(FilterRequest filterRequest) {
-        SubCategoryRepo.getInstance().getResults(filterRequest).subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe(new Observer<Result>() {
+    public void getFilterHospitals(String mac ,FilterRequest filterRequest) {
+        SubCategoryRepo.getInstance().getResults(mac,filterRequest).subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe(new Observer<Result>() {
             @Override
             public void onSubscribe(Disposable d) {
 

@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.telecom.Call;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ import com.example.essam.hospitalscover.ModelView.CategoryModelView;
 import com.example.essam.hospitalscover.ModelView.GoogleMapsNavigation;
 import com.example.essam.hospitalscover.ModelView.MyMACAdress;
 import com.example.essam.hospitalscover.R;
+import com.example.essam.hospitalscover.webServicse.CheckRequestResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,17 +50,17 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
     private List<CategoryData> categoryList;
     private ProgressBar progressBar;
 
-    private Toolbar toolbar ;
+    private Toolbar toolbar;
     private static final int REQUEST_LOCATION = 1;
     LocationManager locationManager;
-   public static Location currentLocation=null;
+    public static Location currentLocation = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_home_page);
 
-      //  requestPermissions();
+        //  requestPermissions();
 
         modelView = ViewModelProviders.of(this).get(CategoryModelView.class);
         initView();
@@ -70,17 +72,35 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
             buildAlertMessageNoGps();
 
         } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            currentLocation=getLocation();
-            Toast.makeText(this, currentLocation.getLatitude()+" "+currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+            currentLocation = getLocation();
 
         }
 
         showProgress();
-        modelView.getAllCategory();
+        modelView.chechBooking(MyMACAdress.getMacAddr());
 
     }
 
     private void initListener() {
+        modelView.getCheck().observe(this, new Observer<CheckRequestResponse>() {
+            @Override
+            public void onChanged(@Nullable CheckRequestResponse checkRequestResponse) {
+                hideProgress();
+                if (checkRequestResponse != null) {
+                    if (checkRequestResponse.redirect) {
+                        gotDetailsActivity(checkRequestResponse);
+
+                    } else {
+                        showProgress();
+                        modelView.getAllCategory(MyMACAdress.getMacAddr());
+                    }
+
+                } else {
+                    Toast.makeText(HomePage.this, "Please Try Again.", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
 
         modelView.getCategory().observe(this, new Observer<Category>() {
                     @Override
@@ -100,6 +120,13 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
         );
     }
 
+    private void gotDetailsActivity(CheckRequestResponse checkRequestResponse) {
+        Intent intent = new Intent(this, DetailsActivity.class);
+        intent.putExtra("booking", checkRequestResponse);
+        startActivity(intent);
+        finish();
+    }
+
 
     private void setUpAdapter() {
         categoryAdapter = new CategoryAdapter(this, this);
@@ -109,7 +136,7 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
     }
 
     private void initView() {
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         recyclerCategory = (RecyclerView) findViewById(R.id.recycler_category);
         recyclerCategory.setHasFixedSize(true);
@@ -123,7 +150,7 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
 
     @Override
     public void onCardClick(View view, int position) {
-             goToSubCategory(position);
+        goToSubCategory(position);
     }
 
 
@@ -132,8 +159,8 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
         intent.putExtra("name", categoryList.get(position).getName());
         intent.putExtra("id", categoryList.get(position).getId());
         intent.putExtra("icon", categoryList.get(position).getIcon());
-        intent.putExtra("lat",currentLocation.getLatitude());
-        intent.putExtra("long",currentLocation.getLongitude());
+        intent.putExtra("lat", currentLocation.getLatitude());
+        intent.putExtra("long", currentLocation.getLongitude());
         startActivity(intent);
     }
 
@@ -141,11 +168,12 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
     private void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
     }
+
     private void hideProgress() {
         progressBar.setVisibility(View.GONE);
     }
 
-    private Location getLocation(){
+    private Location getLocation() {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
                 (this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -157,26 +185,27 @@ public class HomePage extends AppCompatActivity implements AdapterCategoryInterf
 
             Location location1 = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-            Location location2 = locationManager.getLastKnownLocation(LocationManager. PASSIVE_PROVIDER);
+            Location location2 = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 
             if (location != null) {
-                return  location;
+                return location;
 
 
-            } else  if (location1 != null) {
-                return  location1;
+            } else if (location1 != null) {
+                return location1;
 
-            } else  if (location2 != null) {
-                return  location2;
-            }else{
+            } else if (location2 != null) {
+                return location2;
+            } else {
 
-                Toast.makeText(this,"Unable to Trace your location",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Unable to Trace your location", Toast.LENGTH_SHORT).show();
             }
         }
 
 
-        return  null;
+        return null;
     }
+
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Please Turn ON your GPS Connection")

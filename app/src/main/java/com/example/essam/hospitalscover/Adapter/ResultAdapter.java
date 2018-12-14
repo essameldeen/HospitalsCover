@@ -50,19 +50,17 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-         ResultData item = resultDatalist.get(position);
+        ResultData item = resultDatalist.get(position);
 
-         if(item.getName()!=null)
-         viewHolder.hospital_name.setText(item.getName());
-         if(item.getAddress()!=null)
-             viewHolder.hospital_address.setText(item.getAddress());
-         if(item.getImage()!=null){
-             Glide.with(context).load(item.getImage()).into(viewHolder.hospital_image);
-         }
-         int x = item.getRating().intValue();
-         viewHolder.hospital_rating.setNumStars(x);
-
-
+        if (item.getName() != null)
+            viewHolder.hospital_name.setText(item.getName());
+        if (item.getAddress() != null)
+            viewHolder.hospital_address.setText(item.getAddress());
+        if (item.getImage() != null) {
+            Glide.with(context).load(item.getImage()).into(viewHolder.hospital_image);
+        }
+        int x = item.getRating().intValue();
+        viewHolder.hospital_rating.setText("rating:" + x +" /5" + "  ");
 
 
     }
@@ -82,7 +80,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         private AppCompatButton booking;
         private AppCompatImageButton call;
         private AppCompatImageButton nav;
-        private RatingBar hospital_rating;
+        private TextView hospital_rating;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -92,7 +90,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
             booking = (AppCompatButton) itemView.findViewById(R.id.booking);
             call = (AppCompatImageButton) itemView.findViewById(R.id.call);
             nav = (AppCompatImageButton) itemView.findViewById(R.id.nav_map);
-            hospital_rating=(RatingBar)itemView.findViewById(R.id.hospital_rating);
+            hospital_rating = (TextView) itemView.findViewById(R.id.hospital_rating);
 
             nav.setOnClickListener(new View.OnClickListener() {
                 @Override

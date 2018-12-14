@@ -26,6 +26,7 @@ import com.example.essam.hospitalscover.Interfaces.AdapterCategoryInterface;
 import com.example.essam.hospitalscover.Model.Result;
 import com.example.essam.hospitalscover.Model.ResultData;
 import com.example.essam.hospitalscover.Model.SubCategoryData;
+import com.example.essam.hospitalscover.ModelView.MyMACAdress;
 import com.example.essam.hospitalscover.ModelView.SubCategoryModelView;
 import com.example.essam.hospitalscover.R;
 import com.example.essam.hospitalscover.webServicse.FilterRequest;
@@ -47,7 +48,8 @@ public class SubCategory extends AppCompatActivity implements AdapterCategoryInt
     private String idSubCategory;
     private Toolbar toolbar;
     private double LONG, LAT;
-
+    String name;
+    String icon;
     AlertDialog dialog;
     AlertDialog.Builder builder;
 
@@ -60,8 +62,8 @@ public class SubCategory extends AppCompatActivity implements AdapterCategoryInt
         initListener();
 
 
-        String name = getIntent().getStringExtra("name");
-        String icon = getIntent().getStringExtra("icon");
+         name = getIntent().getStringExtra("name");
+         icon = getIntent().getStringExtra("icon");
         idCategory = getIntent().getStringExtra("id");
         LONG = getIntent().getDoubleExtra("long", -1);
         LAT = getIntent().getDoubleExtra("lat", -1);
@@ -122,6 +124,8 @@ public class SubCategory extends AppCompatActivity implements AdapterCategoryInt
         Intent intent = new Intent(this, ResultActiviyt.class);
         intent.putExtra("data", (Serializable) list);
         intent.putExtra("id", idSubCategory);
+        intent.putExtra("subCategoryName",name);
+        intent.putExtra("subCategoryImage",icon);
         startActivity(intent);
     }
 
@@ -158,7 +162,7 @@ public class SubCategory extends AppCompatActivity implements AdapterCategoryInt
         filterRequest.destination.longitude = LONG;
         filterRequest.subCategoryId = subCategoryDataList.get(position).getId();
         idSubCategory = subCategoryDataList.get(position).getId();
-        modelView.getFilterHospitals(filterRequest);
+        modelView.getFilterHospitals(MyMACAdress.getMacAddr(),filterRequest);
 
     }
 
@@ -174,7 +178,7 @@ public class SubCategory extends AppCompatActivity implements AdapterCategoryInt
 
         builder = new AlertDialog.Builder(this, R.style.AlertDialog)
                 .setTitle("Pleas Waiting ")
-                .setMessage("Searching for your")
+                .setMessage("Searching for your Needs...")
 
                 .setCancelable(false);
 

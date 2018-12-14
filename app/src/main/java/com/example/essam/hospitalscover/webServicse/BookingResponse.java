@@ -3,7 +3,9 @@ package com.example.essam.hospitalscover.webServicse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class BookingResponse {
+import java.io.Serializable;
+
+public class BookingResponse implements Serializable {
     @SerializedName("data")
     @Expose
     public Data data;

@@ -79,12 +79,12 @@ public class SubCategoryRepo {
     }
 
 
-    public Observable<Result> getResults(FilterRequest filterRequest) {
+    public Observable<Result> getResults(String mac ,FilterRequest filterRequest) {
         return Observable.create(new ObservableOnSubscribe<Result>() {
             @Override
             public void subscribe(ObservableEmitter<Result> emitter) throws Exception {
 
-                subCategoryWebService.getNeartsHospitals(filterRequest).subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe(new Observer<Result>() {
+                subCategoryWebService.getNeartsHospitals(mac,filterRequest).subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe(new Observer<Result>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
@@ -113,4 +113,6 @@ public class SubCategoryRepo {
 
 
     }
+
+
 }

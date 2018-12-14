@@ -2,7 +2,9 @@ package com.example.essam.hospitalscover.Repository;
 
 import com.example.essam.hospitalscover.Model.Category;
 import com.example.essam.hospitalscover.Model.Example;
+import com.example.essam.hospitalscover.webServicse.BookingResponse;
 import com.example.essam.hospitalscover.webServicse.CategoryWebService;
+import com.example.essam.hospitalscover.webServicse.CheckRequestResponse;
 import com.example.essam.hospitalscover.webServicse.TempWebService;
 
 import java.util.List;
@@ -44,11 +46,11 @@ public class CategoryRepo {
     // all function that connect to api "end Point "
 
 
-    public Observable<Category> getAllCategory() {
+    public Observable<Category> getAllCategory(String mac) {
         return Observable.create(new ObservableOnSubscribe<Category>() {
             @Override
             public void subscribe(ObservableEmitter<Category> emitter) throws Exception {
-                categoryWebService.getAllCategory().subscribeOn(Schedulers.io()).subscribeOn(Schedulers.io()).subscribe(new Observer<Category>() {
+                categoryWebService.getAllCategory( mac).subscribeOn(Schedulers.io()).subscribeOn(Schedulers.io()).subscribe(new Observer<Category>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
@@ -71,6 +73,36 @@ public class CategoryRepo {
                     }
                 });
 
+            }
+        });
+
+    }
+
+    public Observable<CheckRequestResponse> checkingBooking(String mac){
+        return Observable.create(new ObservableOnSubscribe<CheckRequestResponse>() {
+            @Override
+            public void subscribe(ObservableEmitter<CheckRequestResponse> emitter) throws Exception {
+                        categoryWebService.checkBooking(mac).subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe(new Observer<CheckRequestResponse>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(CheckRequestResponse value) {
+                                  emitter.onNext(value);
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                               emitter.onNext(null);
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
             }
         });
 

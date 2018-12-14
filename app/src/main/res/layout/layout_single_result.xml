@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_margin="5dp"
+    android:orientation="vertical"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp">
 
@@ -36,55 +36,58 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <RatingBar
+        <TextView
             android:id="@+id/hospital_rating"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/name_hospital"
-            android:layout_marginTop="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
             android:layout_toRightOf="@+id/image_hospitals"
-            android:max="5"
-            android:rating="2"
-            android:theme="@style/RatingBar" />
+            android:drawableEnd="@drawable/star_icon"
+            android:gravity="center"
+            android:text="rating: 4 /5  " />
 
         <TextView
             android:id="@+id/hospital_address"
-            android:text="location is sanjnsadjnsjdansajdnjsandjnasjdnajsdnjsadsandjksajdn"
-            android:layout_below="@+id/hospital_rating"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:layout_below="@+id/image_hospitals"
+            android:layout_marginStart="10dp"
+            android:drawableLeft="@drawable/location_icon"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="  location is sanjnsadjnsjdansajdnjsandjnasjdnajsdnjsadsandjksajdn" />
 
         <RelativeLayout
-            android:layout_below="@+id/hospital_address"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hospital_address"
+            android:orientation="horizontal">
+
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/booking"
-                android:text="BOOKING"
-                android:textColor="@color/colorPrimary"
-                android:background="@android:color/transparent"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="BOOKING"
+                android:textColor="@color/colorPrimary" />
 
             <android.support.v7.widget.AppCompatImageButton
                 android:id="@+id/call"
-                android:background="@drawable/phone_icon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="8dp"
-                android:layout_width="32dp"
-                android:layout_height="32dp" />
+                android:background="@drawable/phone_icon" />
+
             <android.support.v7.widget.AppCompatImageButton
                 android:id="@+id/nav_map"
-                android:background="@drawable/map_icon"
-                android:layout_toLeftOf="@+id/call"
-                android:layout_margin="8dp"
                 android:layout_width="32dp"
-                android:layout_height="32dp" />
+                android:layout_height="32dp"
+                android:layout_margin="8dp"
+                android:layout_toLeftOf="@+id/call"
+                android:background="@drawable/map_icon" />
 
 
         </RelativeLayout>

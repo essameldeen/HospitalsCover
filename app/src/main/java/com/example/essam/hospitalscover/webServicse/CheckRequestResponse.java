@@ -5,15 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Data implements Serializable {
-
-    @SerializedName("reservation")
+public class CheckRequestResponse implements Serializable {
+    @SerializedName("data")
     @Expose
-    public Reservation reservation;
-    @SerializedName("hospital")
+    public InformationBooking data;
+    @SerializedName("redirect")
     @Expose
-    public Hospital hospital;
-
-
-
+    public Boolean redirect;
 }
