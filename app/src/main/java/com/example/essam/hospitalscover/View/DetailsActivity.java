@@ -12,11 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageButton;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.bumptech.glide.Glide;
 import com.example.essam.hospitalscover.ModelView.DetailsViewModel;
@@ -55,6 +57,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private String phone;
     private Double LONG, LAT;
     private Reservation cancelReservation;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,9 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             areadyBooking = false;
             updataData();
         }
+        setSupportActionBar(toolbar);
+        setTitle("Your Reservation");
+
 
     }
 
@@ -93,6 +99,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         LAT = checkRequestResponse.data.hospitalLatitude;
 
         cancelReservation = checkRequestResponse.data.reservation;
+
     }
 
     private void initListener() {
@@ -138,6 +145,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initView() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         subCategoryName = (TextView) findViewById(R.id.name_subCategory);
         subCategoryImage = (ImageView) findViewById(R.id.image_subCategory);
