@@ -19,28 +19,28 @@ public class DetailsViewModel extends ViewModel {
     }
 
     public void canceleBooking(CanceleRequest reservation) {
-        DetailsRepo.getInstance().canceleBooking(reservation).subscribeOn(Schedulers.io()).observeOn(Schedulers.io())
-                .subscribe(new Observer<Boolean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
+            DetailsRepo.getInstance().canceleBooking(reservation).subscribeOn(Schedulers.io()).observeOn(Schedulers.io())
+                    .subscribe(new Observer<Boolean>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onNext(Boolean value) {
-                        cancele.postValue(value);
-                    }
+                        @Override
+                        public void onNext(Boolean value) {
+                            cancele.postValue(value);
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        cancele.postValue(false);
-                    }
+                        @Override
+                        public void onError(Throwable e) {
+                            cancele.postValue(false);
+                        }
 
-                    @Override
-                    public void onComplete() {
+                        @Override
+                        public void onComplete() {
 
-                    }
-                });
+                        }
+                    });
 
     }
 
